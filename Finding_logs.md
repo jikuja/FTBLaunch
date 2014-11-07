@@ -98,7 +98,7 @@ If those files are empty or do not update you need to run launcher from command 
 
 ## If you have installed only JRE and you are running Windows:
 
- 1. Download tool to emit signal which generates thread dump: download link2. Save program in your Desktop
+ 1. Download required external tool: https://github.com/walware/statet/raw/master/de.walware.statet.r.console.core/win32/x86_64/sendsignal.exe Save program in your Desktop
  2. Open command prompt and run launcher in it like described earlier
  3. Fetch PID of the Launcher: To determine PID of the Java:
     - Right-click an empty area on the task bar and select Task Manager.
@@ -114,7 +114,7 @@ If those files are empty or do not update you need to run launcher from command 
 
 ## If you have installed JDK(not JRE): Use visualVM:
 
- - download https://java.net/projects/visualvm/downloads/download/release137/visualvm_137.zip6
+ - download https://java.net/projects/visualvm/downloads/download/release137/visualvm_137.zip
  - Unzip the downloaded archive. The archive already contains the top-level visualvm directory.
  - Start VisualVM by invoking the binary appropriate for your OS: visualvm\bin\visualvm.exe or visualvm/bin/visualvm
  - Start launcher if not already running
