@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <!-- fix header: add space to various elements -->
+    <style>
+        div.customanchor {margin-top:-60px ; padding-top:60px}
+        body { padding-top: 70px; }
+        h1,h2,h3,h4,h5,h6 {margin-top:-60px ; padding-top:60px}
+    </style>
+
+</head>
+<body style="display: none">
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="?page=Finding_logs">Finding Logs</a></li>
+                <li><a href="?page=Paid_minecraft">Paid Minecraft</a></li>
+                <li><a href="?page=Bad_password">Bad Password</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <xmp id="documentation">
+        # this will be replaced
+    </xmp>
+
+
+    <script src="https://code.jquery.com/jquery-2.1.1.js"></script>
+    <script src="https://jonschlinkert.github.io/remarkable/dist/remarkable.js"></script>
+    <!--
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    -->
+
+    <!-- our code -->
+    <script src="../yasd/src/utils.js"></script>
+    <script src="../yasd/src/strapdown.js"></script>
+    <script src="../yasd/src/header.js"></script>
+
+    <script>
+    $( document ).ready(function() {
+        var $body = $("body").hide();
+        $("xmp#documentation").strapdown('useSearchString', {
+            engine: "remarkable",
+            allDone: function() {
+                // hilight current page
+                $.header2();
+
+                // scroll to selected div/anchor
+                var $withid = $("#" + window.location.hash.substr(1));
+                $("body").show();
+                if ($withid.length) {
+                    $withid.get(0).scrollIntoView();
+                }
+            }
+        });
+    });
+</script>
+</div>
+</body>
+</html>
