@@ -44,6 +44,7 @@ import net.ftb.util.FTBFileUtils;
 import net.ftb.util.OSUtils;
 import net.ftb.util.Parallel;
 import net.ftb.util.TrackerUtils;
+import net.ftb.workers.ModpackComparison;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -326,6 +327,10 @@ public class MCInstaller {
 
     public static void launchMinecraft (String installDir, ModPack pack, LoginResponse resp, boolean isLegacy) {
         try {
+            // start worker to check if pack is edited by the user
+            ModpackComparison comp = new ModpackComparison(pack);
+            comp.run();
+
             File packDir = new File(installDir, pack.getDir());
             String gameFolder = installDir + File.separator + pack.getDir() + File.separator + "minecraft";
             File gameDir = new File(packDir, "minecraft");
