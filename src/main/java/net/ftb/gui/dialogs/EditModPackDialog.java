@@ -91,6 +91,7 @@ public class EditModPackDialog extends JDialog {
         jarModsFolder.mkdirs();
 
         setupGui();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setSize(700, 600);
         enabledMods = Lists.newArrayList();
         disabledMods = Lists.newArrayList();
@@ -268,9 +269,9 @@ public class EditModPackDialog extends JDialog {
     private Optional<String> defaultFile (Set<String> defaultMods, String fileName) {
         String alternate = (fileName.endsWith(".disabled") ? fileName.substring(0, fileName.length() - ".disabled".length()) : fileName + ".disabled");
 
-        if (defaultMods.contains(fileName.toLowerCase())) {
+        if (ModPackUtil.defaultModsContains(defaultMods, fileName.toLowerCase())) {
             return Optional.of(fileName.toLowerCase());
-        } else if (defaultMods.contains(alternate.toLowerCase())) {
+        } else if (ModPackUtil.defaultModsContains(defaultMods, alternate.toLowerCase())) {
             return Optional.of(alternate.toLowerCase());
         }
 

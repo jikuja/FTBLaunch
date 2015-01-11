@@ -96,17 +96,18 @@ public final class ModPackUtil {
      * archive could not be located
      */
     private static Set<String> loadDefaultMods (@Nonnull ModPack modpack) {
+        Benchmark.start("loadDefaultMods");
         //This was written based on ModManager's update routine
         String installPath = OSUtils.getCacheStorageLocation();
         File modPackZip = new File(installPath, "ModPacks" + File.separator + modpack.getDir() + File.separator + modpack.getUrl());
 
         if (modPackZip.exists()) {
             ZipInputStream zip = null;
+            Set<String> fileNames = new HashSet<String>();
 
             try {
                 zip = new ZipInputStream(new FileInputStream(modPackZip));
 
-                Set<String> fileNames = new HashSet<String>();
                 ZipEntry ze = null;
 
                 while ((ze = zip.getNextEntry()) != null) {
@@ -114,20 +115,12 @@ public final class ModPackUtil {
                         String fileName = ze.getName();
 
                         if (fileName != null) {
-                            //This is always '/', regardless of the OS - does not match the value of File.separator
-                            int lastSeparator = fileName.lastIndexOf('/');
-                            if (fileName.length() > lastSeparator + 1) {
-                                if (lastSeparator != -1) {
-                                    fileName = fileName.substring(lastSeparator + 1);
-                                }
-
+                            if (isMod(fileName)) {
                                 fileNames.add(fileName.toLowerCase());
                             }
                         }
                     }
                 }
-
-                return fileNames;
 
                 //TODO (romeara) - When the launcher is upgraded to Java7, switch to using nio's FileSystem and visitor pattern, 
                 // it is significantly more performant, such as below:
@@ -148,8 +141,37 @@ public final class ModPackUtil {
                     }
                 }
             }
+            Benchmark.logBench("loadDefaultMods");
+            return fileNames;
         }
-
+        Logger.logDebug("No modpack archive found");
         return Sets.newHashSet();
+    }
+
+    /**
+     * Determines if the given file is a mod file
+     * @param name The name of the file
+     * @return True if the file is a mod file, false otherwise
+     */
+    private static boolean isMod (String name) {
+        //Based on the filtering in the edit mod pack dialog - it limits the available entries in this manner
+        return name.toLowerCase().endsWith(".zip") || name.toLowerCase().endsWith(".jar") || name.toLowerCase().endsWith(".litemod") || name.toLowerCase().endsWith(".zip.disabled")
+                || name.toLowerCase().endsWith(".jar.disabled") || name.toLowerCase().endsWith(".litemod.disabled");
+    }
+
+    public static boolean defaultModsContains(Set<String> defaultMods, String fileName) {
+        for (String s: defaultMods) {
+            //This is always '/', regardless of the OS - does not match the value of File.separator
+            int lastSeparator = s.lastIndexOf('/');
+            if (s.length() > lastSeparator + 1) {
+                if (lastSeparator != -1) {
+                    s = s.substring(lastSeparator + 1);
+                }
+                if (s.equals(fileName)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
