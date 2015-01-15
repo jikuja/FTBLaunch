@@ -17,6 +17,7 @@
 package net.ftb.workers;
 
 import com.google.common.collect.Lists;
+import lombok.Setter;
 import net.ftb.data.ModPack;
 import net.ftb.data.Settings;
 import net.ftb.log.Logger;
@@ -30,25 +31,33 @@ import java.util.concurrent.ExecutionException;
 
 public class ModpackComparison extends SwingWorker<Void, Void> {
     private ModPack pack;
+    @Setter
     private File folder;
+    @Setter
     private String dir;
-    Set<String> fileNames;
+    Set<String> defaultMods;
 
     List<String> enabledMods = Lists.newArrayList();
     List<String> disabledMods = Lists.newArrayList();
 
+    // makes testing easier
+    List<String> enabled = Lists.newArrayList();
+    List<String> added = Lists.newArrayList();
+    List<String> disabled = Lists.newArrayList();
+    List<String> removed = Lists.newArrayList();
+
     public ModpackComparison(ModPack pack) {
         this.pack = pack;
+
+        // setup
+        dir = "minecraft" + File.separator + "mods";
+        folder = new File(Settings.getSettings().getInstallPath(), pack.getDir() + File.separator + dir);
     }
 
     @Override
     protected Void doInBackground () {
         // one-time setup per thread
-        fileNames = ModPackUtil.getDefaultModFiles(pack);
-
-        // setup
-        dir = "minecraft" + File.separator + "mods";
-        folder = new File(Settings.getSettings().getInstallPath(), pack.getDir() + File.separator + dir);
+        defaultMods = ModPackUtil.getDefaultModFiles(pack);
 
         // collect data
         analyzeMods();
@@ -93,10 +102,12 @@ public class ModpackComparison extends SwingWorker<Void, Void> {
 
     private void printAddedMods() {
         for (String s: enabledMods) {
-            if (!fileNames.contains(s)) {
-                if (fileNames.contains(s + ".disabled")) {
+            if (!defaultMods.contains(s)) {
+                if (defaultMods.contains(s + ".disabled")) {
+                    enabled.add(s);
                     Logger.logDebug("User has enabled mod: " + s);
                 } else {
+                    added.add(s);
                     Logger.logDebug("User has added mod: " + s);
                 }
             }
@@ -105,7 +116,8 @@ public class ModpackComparison extends SwingWorker<Void, Void> {
 
     private void printDisabledMods() {
         for (String s: disabledMods) {
-            if (fileNames.contains(s.replace(".disabled", ""))) {
+            if (defaultMods.contains(s.replace(".disabled", ""))) {
+                disabled.add(s);
                 Logger.logDebug("User has disabled mod: " + s.replace(".disabled", ""));
             }
         }
@@ -113,13 +125,15 @@ public class ModpackComparison extends SwingWorker<Void, Void> {
 
     private void printRemovedMods() {
         String dir = this.dir.replace("\\", "/");
-        for (String s: fileNames) {
+        for (String s: defaultMods) {
             if ( s.startsWith(dir) ) {
                 if (s.endsWith(".disabled")) {
                     if ( ! enabledMods.contains(s.replace(".disabled","")) && ! disabledMods.contains(s))
+                        removed.add(s);
                         Logger.logDebug("User has removed mod: " + s);
                 } else {
                     if ( ! enabledMods.contains(s) && ! disabledMods.contains(s + ".disabled"))
+                        removed.add(s);
                         Logger.logDebug("User has removed mod: " + s);
                 }
             }
