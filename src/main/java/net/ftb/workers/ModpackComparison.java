@@ -56,6 +56,10 @@ public class ModpackComparison extends SwingWorker<Void, Void> {
 
     @Override
     protected Void doInBackground () {
+        if (!folder.exists()) {
+            Logger.logError(folder + " not found");
+            return null;
+        }
         // one-time setup per thread
         defaultMods = ModPackUtil.getDefaultModFiles(pack);
 
