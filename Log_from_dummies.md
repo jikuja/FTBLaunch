@@ -2,10 +2,10 @@
 
 1. Open launcher
 2. Click options tab
-3. Check the boxes `Show Console` and `Reopen launcher when Minecraft exits`
+3. Check the boxes `Show Console` and `Reopen launcher when Minecraft exits` if not turn on by default
 4. Close launcher
 5. Open launcher
-6. Selec pack
+6. Select pack
 7. Press launch button
 8. Wait untill crash/error/other problem occurs
 9. Locate Feed The Beast Launcher Console window

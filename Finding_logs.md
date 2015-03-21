@@ -45,7 +45,7 @@ If you have network problems then `Upload Log` does not work. In this situation 
 ## Manually submit your log files
 
  - Log files are located in your FTB installation directory. FTBLauncherLog.txt is launcher's log and MinecraftLog.txt is minecraft's log. FTBLauncherLog.txt is always needed and MinecraftLog.txt if problem is in your modpack e.g. modpack crashes.
- - Open http://wikisend.com/, press `Browse` button, select log file and then press `Upload file` button. Add given link to your question/comment or paste link to IRC
+ - Open http://www.zippyshare.com/, press `Browse` button, select log file and then press `Start upload` button. Add given link to your question/comment or paste link to IRC
 
 <div id="server" class="customanchor"></div>
 
@@ -84,13 +84,13 @@ If those files are empty or do not update you need to run launcher from command 
  - type: `dxdiag` and press `enter`
  - on the dxdiag screen, click `save all information`
  - save it to a file on your desktop
- - go to http://wikisend.com16 and upload that file and give us the URL
+ - go to http://www.zippyshare.com/ and upload that file and give us the URL
 
 ## Linux
 
  - install lshw
  - run `sudo lshw > lshw.log` in terminal
- - go to http://wikisend.com16 and upload that file and give us the URL
+ - go to http://www.zippyshare.com/ and upload that file and give us the URL
 
 <div id="threaddump" class="customanchor"></div>
 
