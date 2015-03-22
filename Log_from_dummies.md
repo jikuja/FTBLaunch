@@ -9,7 +9,7 @@
 7. Press launch button
 8. Wait untill crash/error/other problem occurs
 9. Locate Feed The Beast Launcher Console window
-10. Press `Upload button` Example: http://i.snag.gy/e6zJA.jpg
+10. Press `Upload button` Example: [i.snag.gy/e6zJA.jpg](http://i.snag.gy/e6zJA.jpg)
 11. Confirm log upload
 12. Copy *link* from browser into clipboard
 13. Give us the *link*
