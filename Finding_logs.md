@@ -96,16 +96,17 @@ If those files are empty or do not update you need to run launcher from command 
 
 # Thread dump:
 
-## Simplest solution: Use visualVM:
+## Simplest solution: Use visualVM with JDK:
 
- - download [visualvm_138.zip](https://java.net/projects/visualvm/downloads/download/release138/visualvm_138.zip) or [VisualVM_138.dmg](https://java.net/projects/visualvm/downloads/download/release138/VisualVM_138.dmg) If you already have this tool skip this and following step
+ - download [visualvm_138.zip](https://java.net/projects/visualvm/downloads/download/release138/visualvm_138.zip) or [VisualVM_138.dmg](https://java.net/projects/visualvm/downloads/download/release138/VisualVM_138.dmg) and [JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) If you already have this tool skip this and following step. (JDK has jvisualvm(.exe) and jconsole(.exe) which also can be used to generate thread dumps.)
  - Unzip the downloaded archive. The archive already contains the top-level visualvm directory
+ - Install JDK
  - Start VisualVM by invoking the binary appropriate for your OS: visualvm\bin\visualvm.exe or visualvm/bin/visualvm
  - Start launcher if not already running
  - Locate Applications tab, (expand local if needed), right click FTB_Launcher-x.x.x.jar (pid xxxxx), left click "Thread dump" from popup menu
  - Thread dump will be opened at right side. Use mouse to select all and copy. Finally paste thread dump into pastebin and give use pastebin link.
 
-## Fast solution if you know what you are doing: Use tools shipped with JDK:
+## Fast solution if you know what you are doing: Use command line tools shipped with JDK:
 
  - start launcher
  - open command line terminal
@@ -128,6 +129,8 @@ If those files are empty or do not update you need to run launcher from command 
     - Note of the number in the PID column.
  4. Open new command prompt and run "SendSignal" e.g. `SendSignal 4242`
  5. copy/paste and post new thread dump from other command prompt
+
+Real operating systems do not require usage of external tools. Use command `kill -3 <PID of java process` to trigger thread dump generation.
 
 <div id="forcemccrash" class="customanchor"></div>
 
