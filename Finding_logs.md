@@ -98,7 +98,7 @@ If those files are empty or do not update you need to run launcher from command 
 
 ## Simplest solution: Use visualVM with JDK:
 
- - download [visualvm_138.zip](https://java.net/projects/visualvm/downloads/download/release138/visualvm_138.zip) or [VisualVM_138.dmg](https://java.net/projects/visualvm/downloads/download/release138/VisualVM_138.dmg) and [JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) If you already have this tool skip this and following step. (JDK has jvisualvm(.exe) and jconsole(.exe) which also can be used to generate thread dumps.)
+ - download [visualVM](https://visualvm.github.io/download.html) and [JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) If you already have these tools skip this and following step. (JDK has jvisualvm(.exe) and jconsole(.exe) which also can be used to generate thread dumps.)
  - Unzip the downloaded archive. The archive already contains the top-level visualvm directory
  - Install JDK
  - Start VisualVM by invoking the binary appropriate for your OS: visualvm\bin\visualvm.exe or visualvm/bin/visualvm
